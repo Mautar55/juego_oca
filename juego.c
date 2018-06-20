@@ -4,13 +4,17 @@
 #include <time.h>
 #include "structs.c"
 int paso_pozo;
+int tiros;
 
 int dado() {
+
     int n = 0;
     n = (rand() % 6)+1;
     printf(">>> Dado tirado: %i\n",n);
+    tiros=tiros+1;
+
     return (n);
-};
+}
 
 void crear(casilla *p, int g){
     casilla * act = p;
@@ -35,17 +39,22 @@ void recorrer_c(casilla * p){
 }
 
 void cargar_c(casilla * m) {
+    printf ("\nEL juego trata de cargar\n");
     casilla *p =m;
+    printf ("\nEL juego trata 2 de cargar\n");
     FILE * arch;
+    printf ("\nEL juego trata 3 de cargar\n");
     if((arch = fopen("circuito_clasico.bin","rb"))==NULL){
         printf("error 1 LEYENDO archivo\n");
     }
+    printf ("\nEL juego trata 4 de cargar\n");
+    casarch * cam;
     while(!feof(arch)){
-        fread(&cars,sizeof(struct casarch),1,arch);
+        fread(cam,sizeof(cam),1,arch);
 
-        crear(p,cars.n);
+        crear(p,cam->n);
     }
-
+    printf ("\nEL juego trata 5 de cargar\n");
     fclose(arch);
 }
 
@@ -57,14 +66,14 @@ void archivar(casilla * p) {
     }
 
     casilla * aux = p;
-
+    casarch * cam;
     while (aux != NULL) {
         printf("entra en el bucle   ");
         // inicio guardado
-        cars.n=aux->n;
-        cars.prenda=aux->prenda;
-        printf("\ncarsn: %i - carsp; %i - auxn %i - auxp %i\n",cars.n,cars.prenda,aux->n,aux->prenda);
-        fwrite(&cars,sizeof(struct casarch),1,arch);
+        cam->n=aux->n;
+        cam->prenda=aux->prenda;
+        printf("\ncarsn: %i - carsp; %i - auxn %i - auxp %i\n",cam->n,cam->prenda,aux->n,aux->prenda);
+        fwrite(cam,sizeof(cam),1,arch);
 
         // fin guardado
 
@@ -118,12 +127,19 @@ void tomar_turno(oca * verde) {
     }
 }
 
-void jugar(int *j1p,int *j2p,int *j3p,int *j4p)
+void jugar(int *j1p,int *j2p,int *j3p,int *j4p,int *ntiros)
 {
+
+    printf ("\nEL juego trata de iniciar\n");
+    paso_pozo=0;
+    printf ("\nEL juego trata 2 de iniciar\n");
     //lectura desde archivo
     casilla * p = malloc(sizeof(casilla));
+    printf ("\nEL juego trata 3 de iniciar\n");
     cargar_c(p);
+    printf ("\nEL juego trata 4 de iniciar\n");
     casilla * t = p->sgte;
+    printf ("\nEL juego trata 5 de iniciar\n");
 
     // generacion de las casillas
     /*casilla * t = malloc(sizeof(casilla));
@@ -188,7 +204,7 @@ void jugar(int *j1p,int *j2p,int *j3p,int *j4p)
 
     casilla * posa;
     casilla * posp;
-
+    printf("\n          --- COMIENZA UNA PARTIDA NUEVAAAAA --- \n");
     while ((jug1->fin == 0)||(jug2->fin == 0)||(jug3->fin == 0)||(jug4->fin == 0)) {
         if (jug1->tag != NULL) {
             tomar_turno(jug1);
@@ -297,6 +313,9 @@ void jugar(int *j1p,int *j2p,int *j3p,int *j4p)
     *j2p = j2res;
     *j3p = j3res;
     *j4p = j4res;
+    *ntiros = tiros;
+
+    printf("\n ++++++ %i %i %i %i %i  \n", *j1p,*j2p,*j3p,*j4p,*ntiros);
 
     // limpieza
 

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "structs.c"
 extern int paso_pozo = 0;
+extern int tiros = 0;
 
 void desplazar(oca * verde,int n){
 

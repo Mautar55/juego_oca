@@ -17,6 +17,20 @@ typedef struct cas {
     struct casilla *ant;
 }casilla;
 
-struct casarch {
+typedef struct alm{ /*alumnos*/
+    char *nombre[25];
+    char *apellido[25];
+    struct alum *sgte;
+}alum;
+
+typedef struct arbol{
+    char *nombre[25];
+    char *apellido[25];
+    struct nodo *izq;
+    struct nodo *der;
+    int ntiros;
+}nodo;
+
+typedef struct casr {
     int n, prenda;
-}cars;
+}casarch;
