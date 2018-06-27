@@ -1,28 +1,28 @@
 # depslib dependency file v1.0
-1529441414 source:/home/mauricio/Programacion/test/main.c
+1530079649 source:/home/mauricio/Programacion/test/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	"structs.c"
 
-1529383279 source:/home/mauricio/Programacion/test/structs.c
+1530069348 source:/home/mauricio/Programacion/test/structs.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1529383279 /home/mauricio/Programacion/test/structs.c
+1530069348 /home/mauricio/Programacion/test/structs.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1529279685 source:/home/mauricio/Programacion/test/mecanicas.c
+1530069822 source:/home/mauricio/Programacion/test/mecanicas.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"structs.c"
 
-1529216131 source:/home/mauricio/Programacion/test/prendas.c
+1529882234 source:/home/mauricio/Programacion/test/prendas.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -34,20 +34,20 @@
 	<string.h>
 	"structs.c"
 
-1529385140 source:/home/mauricio/Programacion/test/juego.c
+1530080918 source:/home/mauricio/Programacion/test/juego.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	"structs.c"
 
-1529378258 source:/home/mauricio/Programacion/test/cola.c
+1529891180 source:/home/mauricio/Programacion/test/cola.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"structs.c"
 
-1529380241 source:/home/mauricio/Programacion/test/arbol.c
+1530079590 source:/home/mauricio/Programacion/test/arbol.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

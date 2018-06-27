@@ -34,3 +34,4 @@ typedef struct arbol{
 typedef struct casr {
     int n, prenda;
 }casarch;
+

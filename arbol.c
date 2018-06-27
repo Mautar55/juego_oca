@@ -80,7 +80,9 @@ void recorrer_a(nodo * top) {
     if ( top->izq != NULL) {
         recorrer_a(top->izq);
     }
-    printf("\n %s %s en %i tiros.",top->apellido,top->nombre,top->ntiros);
+    if(top->ntiros != 1) {
+        printf("\n ---  %s %s en %i tiros.",top->apellido,top->nombre,top->ntiros);
+    }
 
     if ( top->der != NULL) {
         recorrer_a(top->der);

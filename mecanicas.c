@@ -5,11 +5,27 @@
 extern int paso_pozo = 0;
 extern int tiros = 0;
 
-void desplazar(oca * verde,int n){
+char buf_a[4][25];
+char buf_n[4][25];
+
+void desplazar(oca * verde,int n);
+void ir_hasta(oca*verde,int f);
+void c_oca(oca*verde);
+void puente(oca*verde);
+void posada (oca*verde);
+void pozo (oca*verde);
+void laberinto (oca*verde);
+void carcel (oca*verde);
+void dados(oca*verde);
+void calavera(oca*verde);
+void jardin(oca*verde);
+
+
+/*void desplazar(oca * verde,int n){
 
     casilla * aux = verde->pos;
 
-    int g = n;
+    int g = n,m=0;
 
     if (n>0) {
         while (g != 0) {
@@ -20,12 +36,23 @@ void desplazar(oca * verde,int n){
                 if(aux->n == 42){
                     paso_pozo = 1;
                 }
-
             } else {
-                break;
+                m=g;
+                g=0;
             }
         }
-    } else if (n<0) {
+        if (m != 0) {
+            while (m != 0) {
+                aux = aux->ant;
+                m = m-1;
+
+                if(aux->n == 42){
+                    paso_pozo = 1;
+                }
+            }
+        }
+    } else{
+     if (n<0) {
         while (g != 0) {
             aux = aux->ant;
             g = g+1;
@@ -35,10 +62,64 @@ void desplazar(oca * verde,int n){
             }
         }
     }
+    }
 
     // retroceso para el jardin de la oca
 
-    if (g != 0) {
+
+    verde->pos = aux;
+};*/
+
+void desplazar(oca * verde,int n){
+
+    casilla * aux = verde->pos;
+    int m = 0;
+    int g = n;
+
+    if (n>0) {
+        while (g != 0) {
+            if(aux->sgte != NULL) {
+                aux = aux->sgte;
+                g = g-1;
+
+                if(aux->n == 31){
+                    paso_pozo = 1;
+
+                }
+
+            } else {
+                m=g;
+                g=0;
+                if (m != 0) {
+            while (m != 0) {
+                aux = aux->ant;
+                m = m-1;
+
+                if(aux->n == 31){
+                    paso_pozo = 1;
+                }
+            }
+        }
+            }
+        }
+
+        //jj
+
+
+    } else if (n<0) {
+        while (g != 0) {
+            aux = aux->ant;
+            g = g+1;
+
+            if(aux->n == 31){
+                paso_pozo = 1;
+            }
+        }
+    }
+
+    // retroceso para el jardin de la oca
+
+    /*if (g != 0) {
         g = -g;
         while (g != 0) {
             aux = aux->ant;
@@ -48,7 +129,7 @@ void desplazar(oca * verde,int n){
                 paso_pozo = 1;
             }
         }
-    }
+    }*/
     verde->pos = aux;
 };
 
@@ -85,7 +166,9 @@ void c_oca(oca*verde) {
     while ((pas->prenda != 1) || (pas->n < m)) {
         if(pas->sgte !=NULL) {
             pas = pas->sgte;
-        } else { break; }
+        } else {
+            break;
+        }
     }
 
     int z = pas->n;
@@ -93,7 +176,13 @@ void c_oca(oca*verde) {
 
     aux= verde ->pos;
     m = aux->n;
-    printf("--- OCA El jugador cayo en una oca y se fue feliz a la casilla %i\n",aux->n);
+    printf("--- OCA El jugador cayo en una oca y se fue feliz a la casilla %i\n    Debe tirar el dado para avanzar!",aux->n);
+    int u = dado();
+    desplazar(verde,u);
+    aux= verde ->pos;
+    m = aux->n;
+    printf("--- El jugador avanzo a la casilla %i\n",m);
+    prenda(verde);
 }
 
 
@@ -115,7 +204,7 @@ void pozo (oca*verde) {
 }
 
 void laberinto (oca*verde) {
-    ir_hasta(verde,30);
+    desplazar(verde,-12);
     printf("--- LABERINTO a 30\n");
 }
 
@@ -125,13 +214,17 @@ void carcel (oca*verde) {
 }
 
 void dados(oca*verde){
+    printf("--- DADOS tire los dados para avanzar esas casillas...\n");
     int n=dado();
     desplazar(verde,n);
-    printf("--- DADOS marca para avanzar %i\n",n);
+    casilla * loc = verde->pos;
+    int i = loc->n;
+    printf("--- El jugador avanzo a la casilla %i\n",i);
+    prenda(verde);
 }
 
 void calavera(oca*verde){
-    ir_hasta(verde,1);
+    desplazar(verde,-57);
     printf("--- CALAVERAAAA MUAJAJAJAJJAJAJA\n");
 }
 
@@ -140,6 +233,10 @@ void jardin(oca*verde){
     if (aux->sgte==NULL) {
         verde->fin = 1;
         printf("--- EL JUGADOR %i HA LLEGADO AL JARDIN DE LA OCA, FELICITACIONES!!!!\n", verde->tag);
+    } else {
+        printf("\n*** imprimir");
+        casilla * opo = aux->sgte;
+        printf("\n*** num %i pre %i",opo->n,opo->prenda);
     }
 }
 
